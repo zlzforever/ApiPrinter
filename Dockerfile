@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS api-builder
 WORKDIR /app
-RUN sudo apt-get install clang zlib1g-dev
+RUN apt-get install clang zlib1g-dev
 COPY . .
 RUN cd src/ApiPrinter && dotnet publish -c Release -p:PublishAot=true -o out
 
