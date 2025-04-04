@@ -56,7 +56,12 @@ app.Use(async (context, next) =>
     info.AppendLine("  },");
     info.Append("  \"body\": \"").Append(EscapeStringForJson(requestBody)).Append('"').AppendLine();
     info.AppendLine("}");
-    logger.LogInformation("{Request}", info.ToString());
+    var text = info.ToString();
+    logger.LogInformation("{Request}", text);
+
+    context.Response.StatusCode = 200;
+    context.Response.ContentType = "application/json";
+    await context.Response.WriteAsync(text);
     await next(context);
 });
 
