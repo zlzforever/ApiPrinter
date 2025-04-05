@@ -1,6 +1,11 @@
 using System.Text;
 
 var builder = WebApplication.CreateSlimBuilder(args);
+builder.Logging.AddConsole().AddSimpleConsole(b =>
+{
+    b.SingleLine = true;
+    b.TimestampFormat = "yyyy-MM-dd hh:mm:ss ";
+});
 builder.Services.AddCors(option =>
 {
     option.AddPolicy("___my_cors", policy =>
